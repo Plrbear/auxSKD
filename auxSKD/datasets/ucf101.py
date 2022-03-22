@@ -59,26 +59,17 @@ class ucf101_pace_pretrain(Dataset):
         sample_rate_t = random.randint(1, self.max_sr)
         
         start_frame_t = random.randint(1, num_frames-self.clip_len)
-       # print(start_frame_t)
         #############################################
 
         while sample_rate_s == sample_rate_t:
 
             sample_rate_t = random.randint(1, self.max_sr)
 
-        # rgb_clip = self.loop_load_rgb(rgb_dir, start_frame, sample_rate,
-        #                               self.clip_len, num_frames, segment_start_frame, segment_last_frame)
-
-
-
-
-
 
         rgb_clip_s = self.loop_load_rgb(rgb_dir, start_frame_s, sample_rate_s,
                                       self.clip_len, num_frames, segment_start_frame_s, segment_last_frame_s)
 
         #############################################
-        #print(num_frames)
 
         rgb_clip_t = self.loop_load_rgb(rgb_dir, start_frame_t, sample_rate_t,
                                       self.clip_len, num_frames, segment_start_frame_t, segment_last_frame_t)
@@ -110,11 +101,6 @@ class ucf101_pace_pretrain(Dataset):
             trans_clip_cj_t.append(frame)
 
         trans_clip_cj_t = np.array(trans_clip_cj_t).transpose(3, 0, 1, 2)
-
-
-
-
-
 
 
         return trans_clip_cj_s, trans_clip_cj_t, label
@@ -186,40 +172,4 @@ class ucf101_pace_pretrain(Dataset):
         video_clip = np.array(video_clip)
 
         return video_clip
-
-# if __name__ == '__main__':
-
-#     data_list = 'D:/dataset/hmdb51/list/hmdb51_test_split1_num_frames.list'
-#     rgb_prefix = 'D:/dataset/hmdb51/hmdb51_img'
-
-#     transforms_ = transforms.Compose([
-#         ClipResize((128,171)),
-#         CenterCrop(112),
-#         RandomHorizontalFlip(0.5)
-
-#     ])
-
-#     color_jitter = transforms.ColorJitter(brightness=0.8, contrast=0.8, saturation=0.8, hue=0.2)
-#     rnd_color_jitter = transforms.RandomApply([color_jitter], p=0.8)
-
-#     train_dataset = ucf101_pace_pretrain(data_list, rgb_prefix, clip_len=16, max_sr=4,
-#                                    transforms_=transforms_, color_jitter_=rnd_color_jitter)
-
-#     dataloader = DataLoader(train_dataset, batch_size=1, shuffle=True, num_workers=1)
-
-#     for iter, sample in enumerate(dataloader):
-
-#         rgb_clip, label = sample
-#         print(rgb_clip.shape)
-#         rgb_clip = rgb_clip[0].numpy()
-
-#         print(rgb_clip.shape)
-
-#         rgb_clip = rgb_clip.transpose(1, 2, 3, 0)
-#         for i in range(len(rgb_clip)):
-#             cur_frame = rgb_clip[i]
-
-#             cv2.imshow("img", cur_frame)
-#             cv2.waitKey()
-
 
