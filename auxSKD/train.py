@@ -44,8 +44,8 @@ def parse_args():
     parser.add_argument('--dataset', type=str, default='ucf101', help='ucf101/k400')
     parser.add_argument('--pf', type=int, default=40, help='print frequency')
     parser.add_argument('--model', type=str, default='r21d', help='s3d/r21d/r3d/c3d, pretrain model')
-    parser.add_argument('--data_list', type=str, default='/home/amir/DATA/k400_rspnet.list', help='data list')
-    parser.add_argument('--rgb_prefix', type=str, default='/home/amir/DATA/k400/', help='dataset dir')
+    parser.add_argument('--data_list', type=str, default='/home/amir/DATA/k100.list', help='data list')
+    parser.add_argument('--rgb_prefix', type=str, default='/home/amir/DATA/k100/', help='dataset dir')
 
     parser.add_argument('--print_freq', type=int, default=60, help='print frequency')
     parser.add_argument('--save_freq', type=int, default=1, help='save frequency')
@@ -119,6 +119,10 @@ class ISD(nn.Module):
         if args.model == 'r21d':
             self.encoder_q = r21d.R2Plus1DNet((1, 1, 1, 1), with_classifier=True, num_classes=args.num_classes_segment)
             self.encoder_k = r21d.R2Plus1DNet((1, 1, 1, 1), with_classifier=True, num_classes=args.num_classes_segment)
+            
+        if args.model == 'r3d':
+            self.encoder_q = R3DNet(layer_sizes=(1,1,1,1), with_classifier=True, num_classes=args.num_classes_segment)
+            self.encoder_k = R3DNet(layer_sizes=(1,1,1,1), with_classifier=True, num_classes=args.num_classes_segment)
 
 
             feat_dim = self.encoder_q.linear.in_features
