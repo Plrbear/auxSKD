@@ -189,10 +189,7 @@ class ISD(nn.Module):
         ptr = (ptr + batch_size) % self.K  # move pointer
 
         self.queue_ptr[0] = ptr
-    
-        
-
-
+  
     def forward(self, im_q, im_k):
         # compute query features
         q = self.encoder_q(im_q)
@@ -201,7 +198,7 @@ class ISD(nn.Module):
 
 
         q_f = nn.functional.normalize(feat_q, dim=1)
-      #  q_f=q
+      
         ######################
 
         # compute key features
@@ -370,19 +367,16 @@ def train_student(epoch, train_loader, isd, criterion, criterion1, optimizer, op
 
         # ===================forward=====================
         sim_q, sim_k = isd(im_q=im_q, im_k=im_k)
-        # loss1 = criterion1(inputs=sim_q, targets=sim_k)
-        loss1 = criterion1(sim_q, sim_k)
-        # loss2 = criterion(s_q, label)
-        # loss = loss1 + loss2
-        # loss = loss2
+        loss = criterion1(sim_q, sim_k)
+
 
         # ===================backward=====================
         optimizer.zero_grad()
-        loss1.backward()
+        loss.backward()
         optimizer.step()
 
         # ===================meters=======================
-        loss_meter.update(loss1.item(), im_q.size(0))
+        loss_meter.update(loss.item(), im_q.size(0))
 
         torch.cuda.synchronize()
         batch_time.update(time.time() - end)
