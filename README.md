@@ -22,3 +22,6 @@ python train.py  --gpu 0,1 --ckpt ./auxSKD_pretrained_weights.pth --bs 30 --lr 0
 
 
 Part of our codes are adapted from [ISD](https://github.com/UMBCvision/ISD) and [VideoPace](https://github.com/laura-wang/video-pace), we thank the authors for their contributions.
+ #Contact
+ For any question, please file an issue or contact <br />
+ Amirhossein Dadashzadeh: amir.dzd@gmail.com
