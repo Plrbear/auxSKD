@@ -12,8 +12,8 @@ cd auxSKD
 python train.py  --gpu 0,1 --bs 30 --lr 0.001 --height 128 --width 171 --crop_sz 112 --clip_len 16
 
 ## Primary Pretraining - VSPP
-cd ..__
-cd VSPP__
+cd .. <br />
+cd VSPP <br />
 python train.py  --gpu 0,1 --bs 30 --lr 0.001 --height 128 --width 171 --crop_sz 112 --clip_len 16
 
 
