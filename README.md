@@ -15,7 +15,7 @@ python train.py  --gpu 0,1 --bs 30 --lr 0.001 --height 128 --width 171 --crop_sz
 
 cd .. <br />
 cd VSPP <br />
-python train.py  --gpu 0,1 --ckpt ./auxSKD_pretrained_weights.pth --bs 30 --lr 0.003 --height 128 --width 171 --crop_sz 112 --clip_len 16
+python train.py  --gpu 0,1 --ckpt ./auxSKD_pretrained_weights.pth --bs 30 --lr 0.001 --height 128 --width 171 --crop_sz 112 --clip_len 16
 
 
 # Acknowlegement
