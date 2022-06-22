@@ -7,6 +7,16 @@ Pytorch implementation of [Auxiliary Learning for Self-Supervised Video Represen
 ## Data preparation
 Follow instructions in [VideoPace](https://github.com/laura-wang/video-pace#data-preparation)
 
+## Auxiliary Pretraining
+cd auxSKD
+python train.py  --gpu 0,1 --bs 30 --lr 0.001 --height 128 --width 171 --crop_sz 112 --clip_len 16
+
+## Primary Pretraining - VSPP
+cd ..
+cd VSPP
+python train.py  --gpu 0,1 --bs 30 --lr 0.001 --height 128 --width 171 --crop_sz 112 --clip_len 16
+
+
 # Acknowlegement
 
 
